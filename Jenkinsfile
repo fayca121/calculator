@@ -13,8 +13,17 @@ pipeline{
             steps{
             sh './mvnw test'
             }
-
             }
+        stage("Code coverage"){
+        steps {
+          sh './mvnw verify'
+          publishHTML (target: [
+           reportDir: 'target/jacoco-report/',
+           reportFiles: 'index.html',
+           reportName: 'JaCoCo Report'
+          ])
+        }
+        }
 
     }
 }
