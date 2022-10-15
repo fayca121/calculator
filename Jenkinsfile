@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    triggers{
+     pollSCM('0/5 * * * *')
+    }
     stages{
         stage("Compile"){
 
