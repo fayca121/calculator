@@ -18,4 +18,12 @@ public class CalculatorResourceTest {
                 .body(is("5"));
     }
 
+    @Test
+    public void testMinusEndpoint() {
+        given()
+                .when().get("/calculator/minus?a=3&b=2")
+                .then()
+                .statusCode(200)
+                .body(is("1"));
+    }
 }
