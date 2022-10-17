@@ -27,6 +27,11 @@ pipeline{
           ])
         }
         }
+        stage("Build"){
+         steps{
+           sh './mvnw -DskipTests package'
+         }
+        }
 
     }
 }
