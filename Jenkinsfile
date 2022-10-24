@@ -32,27 +32,6 @@ pipeline{
            sh './mvnw -DskipTests package'
          }
         }
-        stage("Publish"){
-          steps([$class: 'BapSshPromotionPublisherPlugin']) {
-           script{
-            sshPublisher(
-               publishers: [
-                sshPublisherDesc(
-                 configName: DockerHost,
-                  transfers: [
-                   sourceFiles: 'target/calculator-1.0-SNAPSHOT-runner.jar,target/lib/**/',
-                   removePrefix: 'target',
-                   remoteDirectory: '/opt/calculator'
-                  ],
-                  usePromotionTimestamp: false,
-                  useWorkspaceInPromotion: false,
-                  verbose: false
-                )
-               ]
-            )
-           }
-          }
-        }
 
     }
 }
