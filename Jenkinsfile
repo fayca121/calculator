@@ -29,29 +29,14 @@ pipeline{
         }
         stage("Build"){
          steps{
-           sh './mvnw -DskipTests package'
+           sh './mvnw -Dquarkus.package.type=legacy-jar -DskipTests package'
          }
         }
-        stage("Publish"){
-          steps([$class: 'BapSshPromotionPublisherPlugin']) {
-           script{
-            sshPublisher(
-               publishers: [
-                sshPublisherDesc(
-                 configName: DockerHost,
-                  transfers: [
-                   sourceFiles: 'target/calculator-1.0-SNAPSHOT-runner.jar,target/lib/**/',
-                   removePrefix: 'target',
-                   remoteDirectory: '/opt/calculator/'
-                  ],
-                  usePromotionTimestamp: false,
-                  useWorkspaceInPromotion: false,
-                  verbose: false
-                )
-               ]
-            )
-           }
-        }
-      }
+        stage("Publish ssh"){
+          steps {
+            sh 'scp ${WORKSPACE}/calculator-1.0-SNAPSHOT-runner.jar dockeradmin@dockerhost:/opt/calculator'
+            sh 'scp ${WORKSPACE}/lib dockeradmin@dockerhost:/opt/calculator/lib'
+          }
+       }
     }
 }
