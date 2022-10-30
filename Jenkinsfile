@@ -38,7 +38,7 @@ pipeline{
             sshPublisher(
                publishers: [
                 sshPublisherDesc(
-                 configName: DockerHost,
+                 configName: 'DockerHost',
                   transfers: [
                    sourceFiles: 'target/calculator-1.0-SNAPSHOT-runner.jar,target/lib/**/',
                    removePrefix: 'target',
