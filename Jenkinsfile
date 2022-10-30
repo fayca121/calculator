@@ -34,8 +34,8 @@ pipeline{
         }
         stage("Publish ssh"){
           steps {
-            sh 'scp ${WORKSPACE}/calculator-1.0-SNAPSHOT-runner.jar dockeradmin@dockerhost:/opt/calculator'
-            sh 'scp ${WORKSPACE}/lib dockeradmin@dockerhost:/opt/calculator/lib'
+            sh 'scp ${WORKSPACE}/target/calculator-1.0-SNAPSHOT-runner.jar dockeradmin@dockerhost:/opt/calculator'
+            sh 'scp ${WORKSPACE}/target/lib dockeradmin@dockerhost:/opt/calculator/lib'
           }
        }
     }
