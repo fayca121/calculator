@@ -40,7 +40,7 @@ pipeline{
         }
         stage("Build docker image"){
          steps {
-           sh 'ssh dockeradmin@dockerhost cd /opt/calculator && docker build -t faycadz/calculator:1.0 .'
+           sh 'ssh dockeradmin@dockerhost "cd /opt/calculator && docker build -t faycadz/calculator:1.0 ."'
           }
         }
         stage("Push docker image"){
